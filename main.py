@@ -2,7 +2,7 @@ from grovepi import *
 from time import sleep
 from math import isnan
 
-# Connect the sensor to port 2
+# Connect the sensor to port 2 test
 sensor_port = 2
 #Type of the sensor
 sensor_type = 0
