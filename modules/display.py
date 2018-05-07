@@ -3,10 +3,10 @@
 import grove_rgb_lcd as lcd
 import grovepi
 from time import sleep
-from singleView import View
+from views.singleView import View
 from sensor import getDhtData as getSensorData
 
-#Sensors connected test
+#Sensors connected
 button_port = 8
 grovepi.pinMode(button_port,'INPUT')
 
