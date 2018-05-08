@@ -6,7 +6,7 @@ from time import sleep
 import views.View as View
 from sensor import getDhtData as getSensorData
 
-#Sensors connected
+#Sensors connected testing
 button_port = 8
 grovepi.pinMode(button_port,'INPUT')
 
