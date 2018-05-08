@@ -54,9 +54,10 @@ def exitProgram():
 while True:
     try:        
         if(grovepi.digitalRead(button_port)):
-            print('button press')
+            print('single press')
             nextView()
-            sleep(0.3)
+            sleep(0.5)
+        
     except KeyboardInterrupt:
         exitProgram()
         break
