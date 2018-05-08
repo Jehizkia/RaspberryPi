@@ -18,31 +18,35 @@ class BaseView(object):
     def updateText(self, text):
         self.text = text
 
+    def clearScreen(self):
+        lcd.setText('')
+
+    @abstractmethod
     def display(self):
-        lcd.setText(self.text)
-        self.setColor()
+        pass
 
 class TempView(BaseView):
     def getTempHum(self):
         self.temperature = getDhtData()[0]
         self.humidity = getDhtData()[1]
-        #call update text
-        #call display
+        self.updateText('Temp:' + str(self.temperature) + 'C\nHum:' + str(self.humidity))
 
     def changeColorByTemp():
         pass
+    
+    def display(self):
+        self.getTempHum()
+        lcd.setText(self.text)
+        self.setColor()
+    
 
 class NotifyView(BaseView):
     def getNotification(self):
         self.message = ''
+
+    def display(self):
+        lcd.setText(self.text)
+        self.setColor()
     
-
-x = TempView('testi333ng 1',[50,100,220])
-x.display()
-x.getTempHum()
-print(x.temperature)
-
-
-
 
 
