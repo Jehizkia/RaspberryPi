@@ -20,8 +20,6 @@ currentView = 0
 #Methods
 def displayCurrentView ():
     try:
-        #lcd.setText(views[currentView].text)
-        #views[currentView].setColor()
         views[currentView].display()
     except IndexError as e:
         print(e)
@@ -62,6 +60,7 @@ while True:
         exitProgram()
         break
     
-    except IOError:				# Print "Error" if communication error encountered
+    except IOError:
+        # Print "Error" if communication error encountered
         print ("Error")
 
