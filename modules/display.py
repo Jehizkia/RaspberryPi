@@ -5,10 +5,13 @@ import grovepi
 from time import sleep
 import views.View as View
 from sensor import getDhtData as getSensorData
+import rpisocket.socket as rpisocket
 
-#Sensors connected
+#Sensors connected testing
 button_port = 8
 grovepi.pinMode(button_port,'INPUT')
+
+rotary_port = 2
 
 #Views
 thempHumView = View.TempView('', [150,50,100])
@@ -44,10 +47,11 @@ def nextView():
 def exitProgram():
     print('Closing program...')
     lcd.setText('Closing program...')
-    sleep(3)
+    sleep(1)
     turnOffDisplay()
 
-  
+i = 0
+displayCurrentView()
 #Listens to button events
 while True:
     try:        
@@ -55,7 +59,20 @@ while True:
             print('single press')
             nextView()
             sleep(0.5)
-        
+
+        print(i)
+        i = grovepi.analogRead(rotary_port)
+        if (i >= 682 and i <= 1023):
+            print('Calendar')
+            rpisocket.changeView(1,'Calendar')
+        elif (i >= 341 and i <= 682):
+            print('Temperature')
+            rpisocket.changeView(1,'Temperature')
+        else:
+            print('Room changes')
+            rpisocket.changeView(1,'Room changes')
+            
+        sleep(0.5)
     except KeyboardInterrupt:
         exitProgram()
         break
