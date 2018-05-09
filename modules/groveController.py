@@ -1,4 +1,6 @@
 import grovepi
+import display
+import rpisocket.socket as rpisocket
 
 #Ports/settings
 button_port = 8
@@ -9,9 +11,13 @@ grovepi.pinMode(button_port, 'INPUT')
 #globals
 current = 0
 
+def init():
+   display.displayCurrentView()
+
 def checkButtonPress():
     if(grovepi.digitalRead(button_port)):
-        print('-[action]> Single button press')        
+        print('-[action]> Single button press')
+        display.nextView()
 
 #checks current posistion of rotary
 def checkRotaryTurn():
@@ -24,7 +30,8 @@ def checkRotaryTurn():
         if( checkIfCurrent(current, 1)):
              pass
         else:          
-             print('-[action]> Rotary view: 1')        
+             print('-[action]> Rotary view: 1')
+             rpisocket.changeView(1,'Calendar')
         current = 1
         
     elif (rotaryPosistion >= 341 and rotaryPosistion <= 682):
@@ -32,12 +39,14 @@ def checkRotaryTurn():
             pass
         else:
             print('-[action]> Rotary view: 2')
+            rpisocket.changeView(1,'Temperature')
         current = 2
     else:
         if( checkIfCurrent(current, 3)):
             pass
         else:
             print('-[action]> Rotary view: 3')
+            rpisocket.changeView(1,'Room changes')
         current = 3
 
 #Check if current view equals rotaryView
@@ -46,4 +55,6 @@ def checkIfCurrent(current, rotaryView):
         return False
     else:
         return True
+
+init()
 
