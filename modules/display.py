@@ -47,7 +47,7 @@ def nextView():
 def exitProgram():
     print('Closing program...')
     lcd.setText('Closing program...')
-    sleep(3)
+    sleep(1)
     turnOffDisplay()
 
 i = 0
