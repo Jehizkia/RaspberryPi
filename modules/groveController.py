@@ -2,6 +2,7 @@ import grovepi
 import display
 import rpisocket.socket as rpisocket
 
+print('groveController.py')
 #Ports/settings
 button_port = 8
 rotary_port = 2

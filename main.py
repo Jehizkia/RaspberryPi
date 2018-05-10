@@ -3,13 +3,15 @@ import modules.groveController as controller
 from time import sleep
 
 #Main app
-
+print('run')
 #init
 def init():
+    print('-[init]initialization')
     start()
 
 #start
 def start():
+    print('-[action] Program has started')
     
     #main loop
     while True:       
@@ -22,3 +24,4 @@ def stop():
     pass
 
 init()
+
