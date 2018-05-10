@@ -1,13 +1,33 @@
 #Imports
-import modules.sensor as SensorTempHum
-
+import modules.groveController as controller
+from time import sleep
+from modules.display import turnOffDisplay
+from modules.rpisocket.socket import checkConnection
 
 #Main app
-
+print('run')
 #init
+def init():
+    print('-[init]initialization')
+    start()
 
 #start
-#main loop
-
+def start():
+    print('-[start] Program has started')
+    
+    #main loop
+    while True:
+        try:
+            controller.checkButtonPress()
+            controller.checkRotaryTurn()
+            checkConnection()
+            sleep(0.5)
+        except KeyboardInterrupt:            
+            stop()
 #stop
+def stop():
+    print('-[action]> Exiting program')
+    turnOffDisplay()
+
+init()
 
