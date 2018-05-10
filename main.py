@@ -1,32 +1,33 @@
-from grovepi import *
+#Imports
+import modules.groveController as controller
 from time import sleep
-from math import isnan
+from modules.display import turnOffDisplay
+from modules.rpisocket.socket import checkConnection
 
-# Connect the sensor to port 2
-sensor_port = 2
-#Type of the sensor
-sensor_type = 0
+#Main app
+print('run')
+#init
+def init():
+    print('-[init]initialization')
+    start()
 
-def getDhtData():
-    try:
-        #DHT sensor module
-        data = dht(sensor_port,sensor_type)
-        #if we have nans
-        if isnan(data[0]) is True or isnan(data[1]) is True:
-            raise TypeError('nan error')
-            return ('Nan error')
-        else:        
-            return data
-            
-    except (IOError, TypeError) as e:
-        print(str(e))
-
-    except KeyboardInterrupt as e:
-        print('Exit program')     
-
-print(getDhtData())
+#start
+def start():
+    print('-[start] Program has started')
     
+    #main loop
+    while True:
+        try:
+            controller.checkButtonPress()
+            controller.checkRotaryTurn()
+            checkConnection()
+            sleep(0.5)
+        except KeyboardInterrupt:            
+            stop()
+#stop
+def stop():
+    print('-[action]> Exiting program')
+    turnOffDisplay()
 
+init()
 
-
-    
