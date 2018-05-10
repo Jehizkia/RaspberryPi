@@ -1,6 +1,8 @@
 #Imports
 import modules.groveController as controller
 from time import sleep
+from modules.display import turnOffDisplay
+from modules.rpisocket.socket import checkConnection
 
 #Main app
 print('run')
@@ -11,17 +13,21 @@ def init():
 
 #start
 def start():
-    print('-[action] Program has started')
+    print('-[start] Program has started')
     
     #main loop
-    while True:       
-        controller.checkButtonPress()
-        controller.checkRotaryTurn()
-        sleep(0.5)
-        
+    while True:
+        try:
+            controller.checkButtonPress()
+            controller.checkRotaryTurn()
+            checkConnection()
+            sleep(0.5)
+        except KeyboardInterrupt:            
+            stop()
 #stop
 def stop():
-    pass
+    print('-[action]> Exiting program')
+    turnOffDisplay()
 
 init()
 
