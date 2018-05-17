@@ -3,7 +3,7 @@ import ConfigParser
 
 config = ConfigParser.RawConfigParser()
 configRead = ConfigParser.RawConfigParser()
-configRead.read('../data.cfg')
+configRead.read('/home/pi/Desktop/ictlab/rpiGit/RaspberryPi/data.cfg')
 
 cfg_options = [{'section': 'app_data', 'field': 'room'},
                 {'section': 'app_data', 'field': 'rpi_id'},
@@ -17,8 +17,11 @@ cfg_options = [{'section': 'app_data', 'field': 'room'},
                 ]
 
 #init
-def isFirstRun(): 
-    if (configRead.has_section('app_data') == False and configRead.has_section('grovepi_data') == False):
+def isFirstRun():
+    print(configRead.has_section('app_data'))
+    print(configRead.has_section('grovepi_data'))
+    if (configRead.has_section('app_data') == False or configRead.has_section('grovepi_data') == False):
+        print('-[Check]> First run')
         setup()
     else:
         print('-[Check]> Not first run')
@@ -40,7 +43,7 @@ def checkSection(section):
      
 #Write
 def writeToCfg():
-    with open('../data.cfg', 'wb') as configfile:
+    with open('/home/pi/Desktop/ictlab/rpiGit/RaspberryPi/data.cfg', 'wb') as configfile:
         config.write(configfile)
     print('-[Write cfg ]> Finished')
 
@@ -59,9 +62,8 @@ def setup():
         print(userInput)
 
     writeToCfg()
-    
 
-
+#isFirstRun()
 
 
 
