@@ -1,9 +1,12 @@
 #imports
 import ConfigParser
+import os
+
+savePath = '/home/pi/Desktop/rpiConfig.cfg'
 
 config = ConfigParser.RawConfigParser()
 configRead = ConfigParser.RawConfigParser()
-configRead.read('/home/pi/Desktop/ictlab/rpiGit/RaspberryPi/data.cfg')
+configRead.read(savePath)
 
 cfg_options = [{'section': 'app_data', 'field': 'room'},
                 {'section': 'app_data', 'field': 'rpi_id'},
@@ -18,8 +21,6 @@ cfg_options = [{'section': 'app_data', 'field': 'room'},
 
 #init
 def isFirstRun():
-    print(configRead.has_section('app_data'))
-    print(configRead.has_section('grovepi_data'))
     if (configRead.has_section('app_data') == False or configRead.has_section('grovepi_data') == False):
         print('-[Check]> First run')
         setup()
@@ -43,7 +44,7 @@ def checkSection(section):
      
 #Write
 def writeToCfg():
-    with open('/home/pi/Desktop/ictlab/rpiGit/RaspberryPi/data.cfg', 'wb') as configfile:
+    with open(savePath, 'wb') as configfile:
         config.write(configfile)
     print('-[Write cfg ]> Finished')
 
@@ -55,7 +56,7 @@ def getData(section, value, value_type = ''):
         return configRead.get(section, value)
 
 def setup():
-    print('Insert data')
+    print('Set up config file. \nChanges can always be made to data.cfg \nLocation: %s' % savePath)
     for option in cfg_options:
         userInput = raw_input('Enter %s: ' % option['field'])
         setData(option['section'], option['field'], userInput)
