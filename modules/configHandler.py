@@ -2,16 +2,26 @@
 import ConfigParser
 
 config = ConfigParser.RawConfigParser()
-
 configRead = ConfigParser.RawConfigParser()
 configRead.read('../data.cfg')
+
+cfg_options = [{'section': 'app_data', 'field': 'room'},
+                {'section': 'app_data', 'field': 'rpi_id'},
+                {'section': 'app_data', 'field': 'api_url'},
+                {'section': 'app_data', 'field': 'socket_url'},
+                {'section': 'app_data', 'field': 'socket_port'},
+                {'section': 'grovepi_data', 'field': 'button_port'},
+                {'section': 'grovepi_data', 'field': 'rotaryangle_port'},
+                {'section': 'grovepi_data', 'field': 'dht_sensor_port'},
+                {'section': 'grovepi_data', 'field': 'lcd_port'}               
+                ]
 
 #init
 def isFirstRun(): 
     if (configRead.has_section('app_data') == False and configRead.has_section('grovepi_data') == False):
-        print('is first run')
+        setup()
     else:
-        print('not first run')
+        print('-[Check]> Not first run')
 
 #set data
 def setData(section,field, value):
@@ -41,18 +51,19 @@ def getData(section, value, value_type = ''):
     else:
         return configRead.get(section, value)
 
-setData('app_data','room', 'h412')
-setData('app_data','rpi_id', '1')
-setData('app_data','api_url', 'http://192.168.43.194:3000/')
-setData('app_data','socket_url', '192.168.43.194')
-setData('app_data','socket_port', '3000')
+def setup():
+    print('Insert data')
+    for option in cfg_options:
+        userInput = raw_input('Enter %s: ' % option['field'])
+        setData(option['section'], option['field'], userInput)
+        print(userInput)
 
-setData('grovepi_data','button_port', '1')
-setData('grovepi_data','rotaryangle_port', '1')
-setData('grovepi_data','dht_sensor_port', '1')
-setData('grovepi_data','lcd_port', '1')
+    writeToCfg()
+    
 
-writeToCfg()
+isFirstRun()
+
+
 
 
 
