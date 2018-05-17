@@ -1,0 +1,37 @@
+[1mdiff --git a/modules/__init__.pyc b/modules/__init__.pyc[m
+[1mindex 0f0e571..415d63e 100644[m
+Binary files a/modules/__init__.pyc and b/modules/__init__.pyc differ
+[1mdiff --git a/modules/display.pyc b/modules/display.pyc[m
+[1mindex d2da11c..fb17a25 100644[m
+Binary files a/modules/display.pyc and b/modules/display.pyc differ
+[1mdiff --git a/modules/groveController.pyc b/modules/groveController.pyc[m
+[1mindex 05d2380..9d74d63 100644[m
+Binary files a/modules/groveController.pyc and b/modules/groveController.pyc differ
+[1mdiff --git a/modules/rpisocket/__init__.pyc b/modules/rpisocket/__init__.pyc[m
+[1mindex e641c03..b3271f9 100644[m
+Binary files a/modules/rpisocket/__init__.pyc and b/modules/rpisocket/__init__.pyc differ
+[1mdiff --git a/modules/rpisocket/socket.py b/modules/rpisocket/socket.py[m
+[1mindex 9ee7d25..bb585cc 100644[m
+[1m--- a/modules/rpisocket/socket.py[m
+[1m+++ b/modules/rpisocket/socket.py[m
+[36m@@ -6,7 +6,7 @@[m [mdef on_connect():[m
+     print('-[Request]> Connected with socket')[m
+ [m
+ #Connects to socketio server[m
+[31m-sio = SocketIO('192.168.2.9', 3000) [m
+[32m+[m[32msio = SocketIO('192.168.43.194', 3000)[m[41m [m
+ [m
+ #socket requests[m
+ [m
+[1mdiff --git a/modules/rpisocket/socket.pyc b/modules/rpisocket/socket.pyc[m
+[1mindex f47a3fb..7c5baa8 100644[m
+Binary files a/modules/rpisocket/socket.pyc and b/modules/rpisocket/socket.pyc differ
+[1mdiff --git a/modules/sensor.pyc b/modules/sensor.pyc[m
+[1mindex 1ad57da..cb083b8 100644[m
+Binary files a/modules/sensor.pyc and b/modules/sensor.pyc differ
+[1mdiff --git a/modules/views/View.pyc b/modules/views/View.pyc[m
+[1mindex 2d13173..e230cda 100644[m
+Binary files a/modules/views/View.pyc and b/modules/views/View.pyc differ
+[1mdiff --git a/modules/views/__init__.pyc b/modules/views/__init__.pyc[m
+[1mindex 652f5e0..8f80f20 100644[m
+Binary files a/modules/views/__init__.pyc and b/modules/views/__init__.pyc differ

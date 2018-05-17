@@ -6,7 +6,7 @@ def on_connect():
     print('-[Request]> Connected with socket')
 
 #Connects to socketio server
-sio = SocketIO('192.168.2.9', 3000) 
+sio = SocketIO('192.168.43.194', 3000) 
 
 #socket requests
 
