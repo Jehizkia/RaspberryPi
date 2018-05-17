@@ -61,8 +61,6 @@ def setup():
     writeToCfg()
     
 
-isFirstRun()
-
 
 
 
