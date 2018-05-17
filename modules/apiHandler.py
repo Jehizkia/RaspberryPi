@@ -15,7 +15,7 @@ def getData(route,payload):
     except requests.exceptions.RequestException as e:
         print(e)
 
-# POST request k
+# POST request
 
 pay = {}
 url = ''
