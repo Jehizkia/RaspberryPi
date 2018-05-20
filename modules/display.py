@@ -4,7 +4,6 @@ import grove_rgb_lcd as lcd
 import grovepi
 from time import sleep
 import views.View as View
-from sensor import getDhtData as getSensorData
 
 #Views
 thempHumView = View.TempView('', [150,50,100])

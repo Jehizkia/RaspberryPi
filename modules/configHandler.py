@@ -16,6 +16,7 @@ cfg_options = [{'section': 'app_data', 'field': 'room'},
                 {'section': 'grovepi_data', 'field': 'button_port'},
                 {'section': 'grovepi_data', 'field': 'rotaryangle_port'},
                 {'section': 'grovepi_data', 'field': 'dht_sensor_port'},
+                {'section': 'grovepi_data', 'field': 'dht_sensor_type'},
                 {'section': 'grovepi_data', 'field': 'lcd_port'}               
                 ]
 
@@ -52,6 +53,10 @@ def writeToCfg():
 def getData(section, value, value_type = ''):
     if('int' == value_type):
         return configRead.getint(section, value)
+    elif('float' == value_type):
+        return configRead.getfloat(section, value)
+    elif('bool' == value_type):
+        return configRead.getboolean(section, value)
     else:
         return configRead.get(section, value)
 
@@ -64,7 +69,7 @@ def setup():
 
     writeToCfg()
 
-#isFirstRun()
+
 
 
 

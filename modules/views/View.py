@@ -1,9 +1,11 @@
 from abc import ABCMeta, abstractmethod
 from time import sleep
 import grove_rgb_lcd as lcd
-import sys
-sys.path.append('/home/pi/Desktop/ictlab/rpiGit/RaspberryPi/modules')
-from sensor import getDhtData 
+import sys,os
+sys.path.insert(1, os.path.join(sys.path[0], './modules'))
+#import sensor
+#sys.path.append('/home/pi/Desktop/ictlab/rpiGit/RaspberryPi/modules')
+from sensor import getDhtData
 
 class BaseView(object):
     __metaclass__ = ABCMeta

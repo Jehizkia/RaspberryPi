@@ -1,7 +1,8 @@
 #imports
 import requests
+import configHandler as config
 
-apiUrl = 'http://192.168.43.194:3000/'
+apiUrl = config.getData('app_data', 'api_url')
 
 # GET request
 def getData(route,payload):

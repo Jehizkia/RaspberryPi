@@ -1,11 +1,12 @@
 from grovepi import *
 from time import sleep
 from math import isnan
+import configHandler as config
 
 # Connect the sensor to port 2 test
-sensor_port = 2
+sensor_port = config.getData('grovepi_data', 'dht_sensor_port', 'int')
 #Type of the sensor
-sensor_type = 0
+sensor_type = config.getData('grovepi_data', 'dht_sensor_type', 'int')
 
 def getDhtData():
     try:

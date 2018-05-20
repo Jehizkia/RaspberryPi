@@ -1,11 +1,12 @@
 import grovepi
 import display
-import rpisocket.socket as rpisocket
+import socket as rpisocket
+import configHandler as config
 
-print('groveController.py')
+#print config.getData('grovepi_data', 'button_port', 'int')
 #Ports/settings
-button_port = 8
-rotary_port = 2
+button_port = config.getData('grovepi_data', 'button_port', 'int')
+rotary_port = config.getData('grovepi_data', 'rotaryangle_port', 'int')
 
 grovepi.pinMode(button_port, 'INPUT')
 
@@ -57,5 +58,4 @@ def checkIfCurrent(current, rotaryView):
     else:
         return True
 
-init()
 

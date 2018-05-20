@@ -1,12 +1,15 @@
 from requests.exceptions import ConnectionError
 from socketIO_client_nexus import SocketIO, LoggingNamespace
 import json
+import os, sys
+sys.path.insert(1, os.path.join(sys.path[0], '..'))
+import configHandler as config
 
 def on_connect():
     print('-[Request]> Connected with socket')
 
 #Connects to socketio server
-sio = SocketIO('192.168.2.14', 3000) 
+sio = SocketIO(config.getData('app_data', 'socket_url'), config.getData('app_data', 'socket_port', 'int')) 
 
 #socket requests
 

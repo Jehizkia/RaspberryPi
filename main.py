@@ -1,8 +1,8 @@
 #Imports
+import sys
 import modules.groveController as controller
 from time import sleep
 from modules.display import turnOffDisplay
-from modules.rpisocket.socket import checkConnection
 from modules.configHandler  import isFirstRun
 
 #Main app
@@ -11,6 +11,7 @@ print('run')
 def init():
     print('-[init]initialization')
     isFirstRun()
+    controller.init()
     start()
 
 #start
@@ -22,7 +23,6 @@ def start():
         try:
             controller.checkButtonPress()
             controller.checkRotaryTurn()
-            checkConnection()
             sleep(0.5)
         except KeyboardInterrupt:            
             stop()
@@ -30,6 +30,7 @@ def start():
 def stop():
     print('-[action]> Exiting program')
     turnOffDisplay()
+    sys.exit(1)
 
 init()
 
