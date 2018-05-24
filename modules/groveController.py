@@ -1,6 +1,6 @@
 import grovepi
 import display
-import socket as rpisocket
+import socketHandler as rpisocket
 import configHandler as config
 
 #print config.getData('grovepi_data', 'button_port', 'int')
