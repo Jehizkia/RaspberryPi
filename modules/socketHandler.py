@@ -19,6 +19,12 @@ def changeView(roomID, view):
     jsonData = json.dumps({'room': roomID, 'view': view})
     sio.emit('changeView', jsonData)
 
+def verifyUser(roomID, card):
+    print('-[request]> Send change view: ' + str(card))
+    jsonData = json.dumps({'room': roomID, 'card': card})
+    sio.emit('verifyUser', jsonData)
+    
+
 def checkConnection():
     sio.on('connect', on_connect)
     sio.on('rpiNotification', on_connect)
