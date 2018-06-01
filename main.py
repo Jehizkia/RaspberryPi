@@ -1,16 +1,17 @@
 #Imports
+from modules.configHandler  import isFirstRun
+isFirstRun()
 import sys
 import modules.groveController as controller
 from time import sleep
 from modules.display import turnOffDisplay
-from modules.configHandler  import isFirstRun
 
 #Main app
 print('run')
 #init
 def init():
     print('-[init]initialization')
-    isFirstRun()
+    
     controller.init()
     start()
 
