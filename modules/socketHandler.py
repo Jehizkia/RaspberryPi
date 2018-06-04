@@ -9,15 +9,23 @@ def on_connect():
     print('-[Request]> Connected with socket')
 
 #Connects to socketio server
-sio = SocketIO(config.getData('app_data', 'socket_url'), config.getData('app_data', 'socket_port', 'int')) 
+#sio = SocketIO(config.getData('app_data', 'socket_url'), config.getData('app_data', 'socket_port', 'int')) 
+
+try:
+    print('-[request]>connecting')
+    sio = SocketIO(config.getData('app_data', 'socket_url'), config.getData('app_data', 'socket_port', 'int'), wait_for_connection=False)
+except:
+    print('-[request failed]>Socket server is down. Try again later.')
 
 #socket requests
-
 
 def changeView(roomID, view):
     print('-[request]> Send change view: ' + str(view))
     jsonData = json.dumps({'room': roomID, 'view': view})
-    sio.emit('changeView', jsonData)
+    try:
+        sio.emit('changeView', jsonData)
+    except:
+        print ('-[request failed]>The server is down. Try again later.')
 
 def verifyUser(roomID, card):
     print('-[request]> Send change view: ' + str(card))
