@@ -10,8 +10,7 @@ from modules.display import turnOffDisplay
 print('run')
 #init
 def init():
-    print('-[init]initialization')
-    
+    print('-[init]initialization')    
     controller.init()
     start()
 
