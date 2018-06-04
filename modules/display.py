@@ -3,11 +3,12 @@
 import grove_rgb_lcd as lcd
 import grovepi
 from time import sleep
-import views.View as View
+from views.Temp import TempView
+from views.Notify import NotifyView
 
 #Views
-thempHumView = View.TempView('', [150,50,100])
-nofityView = View.NotifyView('No notifications', [120,0,0])
+thempHumView = TempView('', [150,50,100])
+nofityView = NotifyView('No notifications', [120,0,0])
 
 views = [thempHumView, nofityView]
 currentView = 0
