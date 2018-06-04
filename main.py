@@ -6,7 +6,7 @@ import modules.groveController as controller
 from time import sleep
 from modules.display import turnOffDisplay
 
-#Main appp
+#Main app
 print('run')
 #init
 def init():
