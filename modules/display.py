@@ -1,22 +1,17 @@
-# -*- coding: utf-8 -*-
 #Imports
 import grove_rgb_lcd as lcd
 import grovepi
+from viewController import RequestController, Request
 from time import sleep
-from views.Temp import TempView
-from views.Notify import NotifyView
 
-#Views
-thempHumView = TempView('', [150,50,100])
-nofityView = NotifyView('No notifications', [120,0,0])
-
-views = [thempHumView, nofityView]
+viewControl = RequestController()
+viewRequests = ['temp', 'notify']
 currentView = 0
 
 #Methods
 def displayCurrentView ():
     try:
-        views[currentView].display()
+        viewControl.dispatch_request(Request(viewRequests[currentView]))
         print('-[action]> Display current view')
     except IndexError as e:
         print(e)
@@ -28,7 +23,7 @@ def turnOffDisplay ():
 def nextView():
     global currentView
     try:
-        if(currentView == (len(views) - 1)):
+        if(currentView == (len(viewRequests) - 1)):
             currentView = 0
             displayCurrentView()
             print('-[action]> Display next view')

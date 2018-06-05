@@ -1,7 +1,6 @@
 from views.Temp import TempView
 from views.Notify import NotifyView
 
-
 class Dispatcher(object):
 
     #Views to dispatch
@@ -13,10 +12,8 @@ class Dispatcher(object):
     def dispatch(self, request):
         if request.view in request.views:
             if request.views[0] == request.view:
-                print 'temp'
                 self.thempHumView.display()
             elif request.views[1] == request.view:
-                print 'notify'
                 self.nofityView.display()
             else:
                 print ('Cant dispatch the request')
