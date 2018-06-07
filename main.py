@@ -1,5 +1,5 @@
 #Imports
-from modules.configHandler  import isFirstRun
+from modules.setupRpi import isFirstRun
 isFirstRun()
 import sys
 import modules.groveController as controller
@@ -23,9 +23,11 @@ def start():
         try:
             controller.checkButtonPress()
             controller.checkRotaryTurn()
+            controller.checkRefresh()
             sleep(0.5)
         except KeyboardInterrupt:            
             stop()
+    
 #stop
 def stop():
     print('-[action]> Exiting program')

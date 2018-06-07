@@ -23,8 +23,6 @@ def getDhtData():
         else:
              getDhtData()
             
-   
-
     except KeyboardInterrupt as e:
         print('Exit program')     
 

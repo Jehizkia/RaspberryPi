@@ -1,6 +1,7 @@
 #imports
 import ConfigParser
 import os
+from time import sleep
 
 savePath = '/home/pi/Desktop/rpiConfig.cfg'
 
@@ -18,6 +19,18 @@ cfg_options = [{'section': 'app_data', 'field': 'room'},
                 {'section': 'grovepi_data', 'field': 'dht_sensor_port'},
                 {'section': 'grovepi_data', 'field': 'dht_sensor_type'},
                 {'section': 'grovepi_data', 'field': 'lcd_port'}               
+                ]
+
+cfg_default = [{'section': 'app_data', 'field': 'room', 'value': 0},
+                {'section': 'app_data', 'field': 'rpi_id','value': 0 },
+                {'section': 'app_data', 'field': 'api_url', 'value':'http://192.168.43.194:3000/'},
+                {'section': 'app_data', 'field': 'socket_url', 'value': '192.168.2.14'},
+                {'section': 'app_data', 'field': 'socket_port', 'value':'3000'},
+                {'section': 'grovepi_data', 'field': 'button_port', 'value': 8},
+                {'section': 'grovepi_data', 'field': 'rotaryangle_port', 'value':2},
+                {'section': 'grovepi_data', 'field': 'dht_sensor_port', 'value':2},
+                {'section': 'grovepi_data', 'field': 'dht_sensor_type', 'value':0},
+                {'section': 'grovepi_data', 'field': 'lcd_port', 'value':0}               
                 ]
 
 #init
@@ -51,25 +64,40 @@ def writeToCfg():
 
 #get data
 def getData(section, value, value_type = ''):
-    if('int' == value_type):
-        return configRead.getint(section, value)
-    elif('float' == value_type):
-        return configRead.getfloat(section, value)
-    elif('bool' == value_type):
-        return configRead.getboolean(section, value)
-    else:
-        return configRead.get(section, value)
+    try:
+        if('int' == value_type):
+            return configRead.getint(section, value)
+        elif('float' == value_type):
+            return configRead.getfloat(section, value)
+        elif('bool' == value_type):
+            return configRead.getboolean(section, value)
+        else:
+            return configRead.get(section, value)
+    except Exception as e:
+        print ('Error {}: {}'.format(value,e))
 
 def setup():
     print('Set up config file. \nChanges can always be made to data.cfg \nLocation: %s' % savePath)
     for option in cfg_options:
-        userInput = raw_input('Enter %s: ' % option['field'])
+        userInput = raw_input('Enter {}: '.format(option['field']))
         setData(option['section'], option['field'], userInput)
         print(userInput)
 
     writeToCfg()
+    configRead.read(savePath)
+
+def defaultSetup():
+    print ('default config')
+    userInput = raw_input('Enter room: ')
+    setData('app_data', 'room', userInput)
+    for option in cfg_default:
+        setData(option['section'], option['field'], option['value'])
+    writeToCfg()
+    configRead.read(savePath)
 
 
+    
+    
 
 
 

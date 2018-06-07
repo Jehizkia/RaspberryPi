@@ -2,6 +2,7 @@ import grovepi
 import display
 import socketHandler
 import configHandler as config
+import databaseHandler
 
 #print config.getData('grovepi_data', 'button_port', 'int')
 #Ports/settings
@@ -12,6 +13,8 @@ grovepi.pinMode(button_port, 'INPUT')
 
 #globals
 current = 0
+refreshCount = 0
+refreshRate = 5
 socket = socketHandler.SocketWriter()
 
 def init():
@@ -59,4 +62,12 @@ def checkIfCurrent(current, rotaryView):
     else:
         return True
 
+def checkRefresh():
+   global refreshCount, refreshRate
+   if(refreshCount >= refreshRate):
+      refreshCount = 0
+      display.displayCurrentView()
+      databaseHandler.sendData()
+   else:
+      refreshCount+= 1
 
