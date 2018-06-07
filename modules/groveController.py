@@ -71,3 +71,9 @@ def checkRefresh():
    else:
       refreshCount+= 1
 
+def check():
+   checkButtonPress()
+   checkRotaryTurn()
+   checkRefresh()
+   
+
