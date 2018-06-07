@@ -70,7 +70,4 @@ def checkRefresh():
       databaseHandler.sendData()
    else:
       refreshCount+= 1
-   
-   
-
 

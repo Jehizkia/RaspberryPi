@@ -84,6 +84,7 @@ def setup():
         print(userInput)
 
     writeToCfg()
+    configRead.read(savePath)
 
 def defaultSetup():
     print ('default config')
@@ -92,10 +93,8 @@ def defaultSetup():
     for option in cfg_default:
         setData(option['section'], option['field'], option['value'])
     writeToCfg()
-    print(getData('grovepi_data', 'button_port', 'int'))
-    print(getData('grovepi_data', 'rotaryangle_port', 'int'))
-    print(getData('grovepi_data', 'button_port', 'int'))
-    print(getData('grovepi_data', 'rotaryangle_port', 'int'))
+    configRead.read(savePath)
+
 
     
     
