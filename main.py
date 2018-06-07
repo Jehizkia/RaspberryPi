@@ -23,6 +23,7 @@ def start():
         try:
             controller.checkButtonPress()
             controller.checkRotaryTurn()
+            controller.checkRefresh()
             sleep(0.5)
         except KeyboardInterrupt:            
             stop()
