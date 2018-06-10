@@ -65,11 +65,13 @@ def sendData():
 
 
 
+
+#insertTempHum(13.4, 24, 26,time.time())
+
+
 #updateRaspberry(18, 21)
 #getAll('Raspberry')
 
 #insertTempHum(24.4,56.4,25, int(time.time()))
 #insertRaspberry(25)
-#getAll('TemperatureHumidity')
-
 

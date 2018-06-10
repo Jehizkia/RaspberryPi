@@ -3,11 +3,17 @@ import display
 import socketHandler
 import configHandler as config
 import databaseHandler
+import sensor
+import time
 
 #print config.getData('grovepi_data', 'button_port', 'int')
 #Ports/settings
 button_port = config.getData('grovepi_data', 'button_port', 'int')
 rotary_port = config.getData('grovepi_data', 'rotaryangle_port', 'int')
+
+rpiId = config.getData('app_data', 'rpi_id', 'int')
+roomCode = config.getData('app_data', 'room', 'int')
+
 
 grovepi.pinMode(button_port, 'INPUT')
 
@@ -67,7 +73,7 @@ def checkRefresh():
    if(refreshCount >= refreshRate):
       refreshCount = 0
       display.displayCurrentView()
-      databaseHandler.sendData()
+      databaseHandler.insertTempHum(sensor.getDhtData()[0],  sensor.getDhtData()[1], roomCode, time.time())
    else:
       refreshCount+= 1
 
@@ -75,5 +81,3 @@ def check():
    checkButtonPress()
    checkRotaryTurn()
    checkRefresh()
-   
-
