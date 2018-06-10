@@ -62,8 +62,3 @@ def updateRaspberry(rpiID, room_code):
 
 def sendData():
     print 'Sending to server'
-
-
-insertTempHum(22,44, 26, time.time())
-getAll('TemperatureHumidity')
-conn.close()
