@@ -1,4 +1,3 @@
-from requests.exceptions import ConnectionError
 from socketIO_client_nexus import SocketIO, LoggingNamespace
 import json
 import os, sys

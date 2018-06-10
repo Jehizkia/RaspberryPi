@@ -48,7 +48,6 @@ def isFirstRun():
 def setData(section,field, value):
     checkSection(section)
     config.set(section, field, value)
-    print('-[Set cfg field]> Finished')
 
 #check if sections exists
 def checkSection(section):
@@ -57,7 +56,6 @@ def checkSection(section):
     else:
         print('Section %s Not found' % section)
         config.add_section(section)
-        print('-[Create cfg field]> Finished')
      
 #Write
 def writeToCfg():
@@ -126,11 +124,4 @@ def isNewRaspberry():
         setData('app_data', 'rpi_id', 0)
     else:
         print ('Please enter y or n')
-
-
-    
-    
-
-
-
 
