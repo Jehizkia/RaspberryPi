@@ -17,10 +17,12 @@ def pickConfig():
     if (userInput is 'y'):
         print 'yes'
         configHandler.defaultSetup()
+        registerRoom()
 
     elif(userInput is 'n'):
         print 'no'
         configHandler.setup()
+        registerRoom()
     else:
         print ('Please enter y or n')
         pickConfig()
@@ -31,19 +33,21 @@ def registerRoom():
     room = configHandler.getData('app_data', 'room')
     result = databaseHandler.getById('Raspberry', rpiId)
     if (len(result) > 0):
+        databaseHandler.updateRaspberry(rpiId, room)
         print('Exists, update row with latests room')
         #update row with latests room
     else:
         print('Inserting')
         databaseHandler.insertRaspberry(room)
         newRpi = databaseHandler.getBy('Raspberry', 'room_code', room)
+        print('Added to database')
         print newRpi
         configHandler.configRead.set('app_data', 'rpi_id', newRpi[0][0])
         configHandler.updateCfg()
-        print('Doesnt exist, register')
+        print('Config file updated')
 
 
-registerRoom()
+#registerRoom()
 #print (databaseHandler.getBy('Raspberry', 'room_code', 21)[0][1])
 #isFirstRun()
 

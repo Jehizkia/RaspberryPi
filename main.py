@@ -19,7 +19,7 @@ def init():
 #start
 def start():
     print('-[start] Program has started')
-    
+     
     #main loop
     while True:
         try:
