@@ -6,8 +6,11 @@ user = 'ictlab@ictlab1'
 password = 'Henkie123'
 database = 'dashboard_db_Copy'
 
-conn = pymssql.connect(server=server, user=user, password=password, database=database)
-cursor = conn.cursor()
+try:
+    conn = pymssql.connect(server=server, user=user, password=password, database=database)
+    cursor = conn.cursor()
+except Exeption as e:
+    print('An error has occured: {}'.format(e))
 
 def getAll(table):
     try:
@@ -16,6 +19,22 @@ def getAll(table):
     except Exception as e:
         print ('An error has occured: {}'.format(e)) 
     print row
+
+def getById(table, itemID):
+    try:
+        cursor.execute('SELECT * FROM {} WHERE id = {}'.format(table, itemID))
+        row = cursor.fetchall()
+    except Exception as e:
+        print ('An error has occured: {}'.format(e))
+    return row
+
+def getBy(table, column, item):
+    try:
+        cursor.execute('SELECT * FROM {} WHERE {} = {}'.format(table, column, item))
+        row = cursor.fetchall()
+    except Exception as e:
+        print ('Error: {}'.format(e))
+    return row                    
 
 def insertRaspberry(room_code,active=1,):
     try:
@@ -33,11 +52,26 @@ def insertTempHum(temp, hum, room_code, timestamp):
         print ('An error has occured: {}'.format(e))
 
 
+def updateRaspberry(rpiID, room_code):
+    try:
+        cursor.execute('UPDATE Raspberry SET room_code={} WHERE id={}'.format(room_code, rpiID))
+        print('updated')
+    except Exception as e:
+        print ('An error has occured: {}'.format(e))
+    
+
 def sendData():
     print 'Sending to server'
 
+
+
+
+#insertTempHum(13.4, 24, 26,time.time())
+
+
+#updateRaspberry(18, 21)
+#getAll('Raspberry')
+
 #insertTempHum(24.4,56.4,25, int(time.time()))
 #insertRaspberry(25)
-#getAll('TemperatureHumidity')
-    
 

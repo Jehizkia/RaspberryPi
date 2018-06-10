@@ -1,6 +1,8 @@
-#Imports
+#Setup
 from modules.setupRpi import isFirstRun
 isFirstRun()
+
+#Imports
 import sys
 import modules.groveController as controller
 from time import sleep
@@ -17,13 +19,11 @@ def init():
 #start
 def start():
     print('-[start] Program has started')
-    
+     
     #main loop
     while True:
         try:
-            controller.checkButtonPress()
-            controller.checkRotaryTurn()
-            controller.checkRefresh()
+            controller.check()
             sleep(0.5)
         except KeyboardInterrupt:            
             stop()

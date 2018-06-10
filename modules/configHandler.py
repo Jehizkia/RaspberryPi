@@ -21,8 +21,7 @@ cfg_options = [{'section': 'app_data', 'field': 'room'},
                 {'section': 'grovepi_data', 'field': 'lcd_port'}               
                 ]
 
-cfg_default = [{'section': 'app_data', 'field': 'room', 'value': 0},
-                {'section': 'app_data', 'field': 'rpi_id','value': 0 },
+cfg_default = [ {'section': 'app_data', 'field': 'rpi_id','value': 0 },
                 {'section': 'app_data', 'field': 'api_url', 'value':'http://192.168.43.194:3000/'},
                 {'section': 'app_data', 'field': 'socket_url', 'value': '192.168.2.14'},
                 {'section': 'app_data', 'field': 'socket_port', 'value':'3000'},
@@ -31,6 +30,10 @@ cfg_default = [{'section': 'app_data', 'field': 'room', 'value': 0},
                 {'section': 'grovepi_data', 'field': 'dht_sensor_port', 'value':2},
                 {'section': 'grovepi_data', 'field': 'dht_sensor_type', 'value':0},
                 {'section': 'grovepi_data', 'field': 'lcd_port', 'value':0}               
+                ]
+
+cfg_manual = [  {'section': 'app_data', 'field': 'room'},
+                {'section': 'app_data', 'field': 'rpi_id'},              
                 ]
 
 #init
@@ -62,6 +65,11 @@ def writeToCfg():
         config.write(configfile)
     print('-[Write cfg ]> Finished')
 
+def updateCfg():
+    with open(savePath, 'wb') as configfile:
+        configRead.write(configfile)
+    print('-[Update cfg ]> Finished')
+
 #get data
 def getData(section, value, value_type = ''):
     try:
@@ -82,18 +90,35 @@ def setup():
         userInput = raw_input('Enter {}: '.format(option['field']))
         setData(option['section'], option['field'], userInput)
         print(userInput)
-
+    isNewRaspberry()
     writeToCfg()
     configRead.read(savePath)
 
 def defaultSetup():
     print ('default config')
+    
     userInput = raw_input('Enter room: ')
     setData('app_data', 'room', userInput)
+    
     for option in cfg_default:
         setData(option['section'], option['field'], option['value'])
+
+    isNewRaspberry()
     writeToCfg()
     configRead.read(savePath)
+
+
+def isNewRaspberry():
+    userInput = raw_input('Has this raspberry been registered?[y/n]')
+    if (userInput is 'y'):
+        print 'yes'
+        userInput = raw_input('Enter Raspberry ID: ')
+        setData('app_data', 'rpi_id', userInput)
+    elif(userInput is 'n'):
+        print 'no'
+        setData('app_data', 'rpi_id', 0)
+    else:
+        print ('Please enter y or n')
 
 
     

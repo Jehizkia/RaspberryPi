@@ -1,4 +1,5 @@
 import configHandler
+import databaseHandler
 
 def checkIfFirstRun():
     print ('Checking lmao')
@@ -16,14 +17,37 @@ def pickConfig():
     if (userInput is 'y'):
         print 'yes'
         configHandler.defaultSetup()
+        registerRoom()
 
     elif(userInput is 'n'):
         print 'no'
         configHandler.setup()
+        registerRoom()
     else:
         print ('Please enter y or n')
         pickConfig()
 
-def registerRoomOnDB():
-    pass
+def registerRoom():    
+    #check if room exists
+    rpiId = configHandler.getData('app_data', 'rpi_id')
+    room = configHandler.getData('app_data', 'room')
+    result = databaseHandler.getById('Raspberry', rpiId)
+    if (len(result) > 0):
+        databaseHandler.updateRaspberry(rpiId, room)
+        print('Exists, update row with latests room')
+        #update row with latests room
+    else:
+        print('Inserting')
+        databaseHandler.insertRaspberry(room)
+        newRpi = databaseHandler.getBy('Raspberry', 'room_code', room)
+        print('Added to database')
+        print newRpi
+        configHandler.configRead.set('app_data', 'rpi_id', newRpi[0][0])
+        configHandler.updateCfg()
+        print('Config file updated')
+
+
+#registerRoom()
+#print (databaseHandler.getBy('Raspberry', 'room_code', 21)[0][1])
+#isFirstRun()
 
