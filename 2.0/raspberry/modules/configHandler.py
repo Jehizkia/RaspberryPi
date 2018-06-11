@@ -2,6 +2,7 @@
 import ConfigParser
 import os
 from time import sleep
+import logging
 
 savePath = '/home/pi/Desktop/rpiConfig.cfg'
 
@@ -39,10 +40,10 @@ cfg_manual = [  {'section': 'app_data', 'field': 'room'},
 #init
 def isFirstRun():
     if (configRead.has_section('app_data') == False or configRead.has_section('grovepi_data') == False):
-        print('-[Check]> First run')
+        logging.info('First run')
         setup()
     else:
-        print('-[Check]> Not first run')
+        logging.info('Not first run')
 
 #set data
 def setData(section,field, value):
@@ -52,21 +53,21 @@ def setData(section,field, value):
 #check if sections exists
 def checkSection(section):
     if config.has_section(section):
-        print('-[field check]> %s Exists' % section)
+        logging.info('Exists: {}'.format(section))
     else:
-        print('Section %s Not found' % section)
+        logging.info('Add section: {}'.format(section))
         config.add_section(section)
      
 #Write
 def writeToCfg():
     with open(savePath, 'wb') as configfile:
         config.write(configfile)
-    print('-[Write cfg ]> Finished')
+    logging.info('Config write finished')
 
 def updateCfg():
     with open(savePath, 'wb') as configfile:
         configRead.write(configfile)
-    print('-[Update cfg ]> Finished')
+    logging.info('Config update finished')
 
 #get data
 def getData(section, value, value_type = ''):

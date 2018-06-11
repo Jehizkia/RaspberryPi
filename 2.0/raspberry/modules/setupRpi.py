@@ -2,9 +2,11 @@ import configHandler
 import databaseHandler
 import logging
 
+logging.basicConfig(level=logging.INFO)
+
 def isFirstRun():
     if (configHandler.configHasRequiredSections()):
-        print('Skip setup')
+       logging.info('Skip setup')
     else: 
         pickConfig()
 
@@ -27,7 +29,6 @@ def registerRoomOnServer():
     #check if room exists
     rpiId = configHandler.getData('app_data', 'rpi_id')
     roomCode = configHandler.getData('app_data', 'room')
-    
     if (ifRaspberryExists(rpiId)):
         databaseHandler.updateRaspberry(rpiId, roomCode)
         logging.info('Raspberry updated')
@@ -44,7 +45,7 @@ def ifRaspberryExists(rpiId):
         return False
 
 def updateConfigWithRpiId(roomCode):
-    newRpi = databaseHandler.getBy('Raspberry', 'room_code', roomCode)
+    newRpi = databaseHandler.getRaspberryByRoom(roomCode)
     #Adding id of the new Rpi to config
     configHandler.configRead.set('app_data', 'rpi_id', newRpi[0][0])
     configHandler.updateCfg()

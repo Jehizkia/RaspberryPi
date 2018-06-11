@@ -11,7 +11,7 @@ button_port = config.getData('grovepi_data', 'button_port', 'int')
 rotary_port = config.getData('grovepi_data', 'rotaryangle_port', 'int')
 
 rpiId = config.getData('app_data', 'rpi_id', 'int')
-roomCode = config.getData('app_data', 'room', 'int')
+roomCode = config.getData('app_data', 'room')
 
 grovepi.pinMode(button_port, 'INPUT')
 
@@ -37,7 +37,7 @@ def checkRotaryTurn():
 
     #if rotaryPosition is in range execute a function once
     if (rotaryPosistion >= 682 and rotaryPosistion <= 1023):                
-        if( checkIfCurrent(current, 1)):
+        if( ifCurrentView(current, 1)):
              pass
         else:          
              print('-[action]> Rotary view: 1')
@@ -45,14 +45,14 @@ def checkRotaryTurn():
         current = 1
         
     elif (rotaryPosistion >= 341 and rotaryPosistion <= 682):
-        if( checkIfCurrent(current, 2)):
+        if( ifCurrentView(current, 2)):
             pass
         else:
             print('-[action]> Rotary view: 2')
             socket.send('changeView', {'room': 1, 'view':'Temperature'})
         current = 2
     else:
-        if( checkIfCurrent(current, 3)):
+        if( ifCurrentView(current, 3)):
             pass
         else:
             print('-[action]> Rotary view: 3')
@@ -60,7 +60,7 @@ def checkRotaryTurn():
         current = 3
 
 #Check if current view equals rotaryView
-def checkIfCurrent(current, rotaryView):
+def ifCurrentView(current, rotaryView):
     if(rotaryView is not current):
         return False
     else:
@@ -71,7 +71,7 @@ def checkRefresh():
    if(refreshCount >= refreshRate):
       refreshCount = 0
       display.displayCurrentView()
-      #databaseHandler.insertTempHum(sensor.getDhtData()[0],  sensor.getDhtData()[1], roomCode, time.time())
+      databaseHandler.insertTempHum(sensor.getDhtData()[0],  sensor.getDhtData()[1], roomCode, time.time())
    else:
       refreshCount+= 1
 
