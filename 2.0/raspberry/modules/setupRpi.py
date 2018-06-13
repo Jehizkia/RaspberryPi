@@ -1,5 +1,6 @@
 import configHandler
 import databaseHandler
+import apiRequestController as api
 import logging
 
 logging.basicConfig(level=logging.INFO)
@@ -50,4 +51,4 @@ def updateConfigWithRpiId(roomCode):
     configHandler.configRead.set('app_data', 'rpi_id', newRpi[0][0])
     configHandler.updateCfg()
     logging.info('Inserting Raspberry into Database')
-    
+

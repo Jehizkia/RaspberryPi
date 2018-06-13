@@ -18,7 +18,7 @@ grovepi.pinMode(button_port, 'INPUT')
 #globals
 current = 0
 refreshCount = 0
-refreshRate = 5
+refreshRate = 60
 socket = socketHandler.SocketWriter()
 
 def init():
