@@ -16,6 +16,12 @@ def getReservationByRoom(roomCode):
 def postSensorData(data):
     apiHandler.postData('/rpi/add/sensorData', data)
 
+def postNewRaspberry(data):
+    pass
+
+def postUpdateRaspberry(data):
+    pass
+
 
 def parseJson(data):
     try:        

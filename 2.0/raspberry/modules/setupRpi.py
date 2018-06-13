@@ -27,7 +27,6 @@ def pickConfig():
         pickConfig()
 
 def registerRoomOnServer():    
-    #check if room exists
     rpiId = configHandler.getData('app_data', 'rpi_id')
     roomCode = configHandler.getData('app_data', 'room')
     if (ifRaspberryExists(rpiId)):
@@ -39,7 +38,7 @@ def registerRoomOnServer():
         updateConfigWithRpiId(roomCode)
 
 def ifRaspberryExists(rpiId):
-    rpi = databaseHandler.getById('Raspberry', rpiId)
+    rpi = api.getRaspberryByID(rpiId)
     if (len(rpi) > 0):
         return True
     else:
@@ -51,4 +50,3 @@ def updateConfigWithRpiId(roomCode):
     configHandler.configRead.set('app_data', 'rpi_id', newRpi[0][0])
     configHandler.updateCfg()
     logging.info('Inserting Raspberry into Database')
-
