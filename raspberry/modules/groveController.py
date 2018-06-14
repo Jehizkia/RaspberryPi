@@ -3,7 +3,6 @@ import display
 import socketHandler
 import apiRequestController as api
 import configHandler as config
-import databaseHandler
 import sensor
 import time
 
@@ -70,8 +69,7 @@ def checkRefresh():
    if(refreshCount >= refreshRate):
       refreshCount = 0
       display.displayCurrentView()
-      api.postSensorData(sensor.getDhtData()[0],  sensor.getDhtData()[1], roomCode, time.time())
-      #databaseHandler.insertTempHum(sensor.getDhtData()[0], , roomCode, time.time())
+      api.postSensorData(sensor.getDhtData()[0],  sensor.getDhtData()[1], roomCode, time.time())      
    else:
       refreshCount+= 1
 

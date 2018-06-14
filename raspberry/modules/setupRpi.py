@@ -1,5 +1,4 @@
 import configHandler
-import databaseHandler
 import apiRequestController as api
 import logging
 
@@ -30,12 +29,10 @@ def registerRoomOnServer():
     rpiId = configHandler.getData('app_data', 'rpi_id')
     roomCode = configHandler.getData('app_data', 'room')
     if (ifRaspberryExists(rpiId)):
-        #databaseHandler.updateRaspberry(rpiId, roomCode)
         api.postUpdateRaspberry(rpiId, roomCode)
         logging.info('Raspberry updated')
     else:
         logging.info('Inserting Raspberry into Database')
-        #databaseHandler.insertRaspberry(roomCode)
         api.postNewRaspberry(roomCode)
         updateConfigWithRpiId(roomCode)
 
@@ -47,9 +44,7 @@ def ifRaspberryExists(rpiId):
         return False
 
 def updateConfigWithRpiId(roomCode):
-    #newRpi = databaseHandler.getRaspberryByRoom(roomCode)
     newRpi = api.getRoomByRoomCode(roomCode)
-    #Adding id of the new Rpi to config
     configHandler.configRead.set('app_data', 'rpi_id', newRpi[0]['id'])
     configHandler.updateCfg()
     logging.info('Inserting Raspberry into Database')
