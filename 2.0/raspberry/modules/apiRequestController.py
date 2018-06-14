@@ -1,26 +1,29 @@
-import apiHandler
+import apiHandler as api
 import configHandler as config
 import logging
 import time
 import json
 
 def getRoomByRoomCode(roomCode):
-    return parseJson(apiHandler.getData('/rpi/get/room/{}'.format(roomCode)))
+    return parseJson(api.getData('/rpi/get/room/{}'.format(roomCode)))
 
 def getRaspberryByID(rpiID):
-    return parseJson(apiHandler.getData('/rpi/get/raspberry/{}'.format(rpiID)))
+    return parseJson(api.getData('/rpi/get/raspberry/{}'.format(rpiID)))
+
+def getRaspberryByRoomCode(roomCode):
+    return parseJson(api.getData('/rpi/get/room/{}/raspberry'.format(roomCode)))
 
 def getReservationByRoom(roomCode):
-    return parseJson(apiHandler.getData('/rpi/get/reservation/{}'.format(roomCode)))
+    return parseJson(api.getData('/rpi/get/reservation/{}'.format(roomCode)))
 
-def postSensorData(data):
-    apiHandler.postData('/rpi/add/sensorData', data)
+def postSensorData(temperature, humidity, roomCode, timestamp):
+    api.postData('/rpi/add/sensorData', {'temperature': temperature, 'humidity': humidity, 'room_code': roomCode, 'timestamp': timestamp})
 
-def postNewRaspberry(data):
-    pass
+def postNewRaspberry(roomCode, active=1):
+    api.postData('/rpi/add/raspberry',{'room_code':roomCode, 'active': active})
 
-def postUpdateRaspberry(data):
-    pass
+def postUpdateRaspberry(id, roomCode):
+     api.postData('/rpi/update/raspberry', {'room_code': roomCode, 'id': id})
 
 
 def parseJson(data):
@@ -28,4 +31,3 @@ def parseJson(data):
         return json.loads(data)['response']
     except:
         logging.error('An error as occured')
-

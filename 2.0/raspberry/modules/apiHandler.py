@@ -7,10 +7,8 @@ import json
 
 logging.basicConfig(level=logging.INFO)
 
-apiUrl = config.getData('app_data', 'api_url')
-
-
 def createUrl(route):
+    apiUrl = config.getData('app_data', 'api_url')
     return apiUrl + route
 
 def getData(route, urlParameters=''):

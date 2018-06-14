@@ -23,7 +23,7 @@ cfg_options = [{'section': 'app_data', 'field': 'room'},
                 ]
 
 cfg_default = [ {'section': 'app_data', 'field': 'rpi_id','value': 0 },
-                {'section': 'app_data', 'field': 'api_url', 'value':'http://192.168.43.194:3000/'},
+                {'section': 'app_data', 'field': 'api_url', 'value':'http://192.168.2.4/api'},
                 {'section': 'app_data', 'field': 'socket_url', 'value': '192.168.2.14'},
                 {'section': 'app_data', 'field': 'socket_port', 'value':'3000'},
                 {'section': 'grovepi_data', 'field': 'button_port', 'value': 8},
@@ -81,7 +81,7 @@ def getData(section, value, value_type = ''):
         else:
             return configRead.get(section, value)
     except Exception as e:
-        print ('Error {}: {}'.format(value,e))
+        logging.error('Error {}: {}'.format(value,e))
 
 def setup():
     print('Set up config file. \nChanges can always be made to data.cfg \nLocation: %s' % savePath)
