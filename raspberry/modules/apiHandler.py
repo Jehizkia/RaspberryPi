@@ -1,39 +1,37 @@
 #imports
 import requests
-import configHandler as config
+from configHandler import Configuration as config
 import logging
 import time
 import json
 
 logging.basicConfig(level=logging.INFO)
 
-def createUrl(route):
-    apiUrl = config.getData('app_data', 'api_url')
-    return apiUrl + route
+class ApiRequest():
+    
+    def __init__(self):
+        self.apiUrl = config().getData('app_data', 'api_url')
 
-def getData(route, urlParameters=''):
-    try:
-        logging.info('Getting data from: {}'.format(route))
-        response = requests.get(createUrl(route), params=urlParameters)
-        logging.info('Status code request: {}'.format(response.status_code))
-        return response.text
+    def createUrl(self, route):
+        return self.apiUrl + route
 
-    except requests.exceptions.RequestException as e:
-        logging.error(e)
+    def getData(self, route, urlParameters=''):
+        try:
+            logging.info('Getting data from: {}'.format(route))
+            response = requests.get(self.createUrl(route), params=urlParameters)
+            logging.info('Status code request: {}'.format(response.status_code))
+            return response.text
+
+        except requests.exceptions.RequestException as e:
+            logging.error(e)
 
 
-def postData(route, payload):
-    try:
-        logging.info('Post data to : {}'.format(route))
-        headers = {'Content-Type': 'application/json'}
-        response = requests.post(createUrl(route), json=payload)
-        logging.debug(response)
-        logging.info('done')
-    except requests.exceptions.RequestException as e:
-        logging.error(e)
-
-#print getData('/rpi/get/room/H.1.110')
-
-#data = {'temperature': 11.1,'humidity': 11.1, 'timestamp': time.time(), 'room_code': 'H.1.110'}
-
-#postData('/rpi/add/sensorData', data)
+    def postData(self, route, payload):
+        try:
+            logging.info('Post data to : {}'.format(route))
+            headers = {'Content-Type': 'application/json'}
+            response = requests.post(self.createUrl(route), json=payload)
+            logging.debug(response)
+            logging.info('done')
+        except requests.exceptions.RequestException as e:
+            logging.error(e)

@@ -1,33 +1,33 @@
-import apiHandler as api
-import configHandler as config
+from apiHandler import ApiRequest
 import logging
-import time
 import json
 
-def getRoomByRoomCode(roomCode):
-    return parseJson(api.getData('/rpi/get/room/{}'.format(roomCode)))
+class ApiRequestController:
+    
+    def getRoomByRoomCode(self,roomCode):
+        return self.parseJson(ApiRequest().getData('/rpi/get/room/{}'.format(roomCode)))
 
-def getRaspberryByID(rpiID):
-    return parseJson(api.getData('/rpi/get/raspberry/{}'.format(rpiID)))
+    def getRaspberryByID(self, rpiID):
+        return self.parseJson(ApiRequest().getData('/rpi/get/raspberry/{}'.format(rpiID)))
 
-def getRaspberryByRoomCode(roomCode):
-    return parseJson(api.getData('/rpi/get/room/{}/raspberry'.format(roomCode)))
+    def getRaspberryByRoomCode(self, roomCode):
+        return self.parseJson(ApiRequest().getData('/rpi/get/room/{}/raspberry'.format(roomCode)))
 
-def getReservationByRoom(roomCode):
-    return parseJson(api.getData('/rpi/get/reservation/{}'.format(roomCode)))
+    def getReservationByRoom(self, roomCode):
+        return self.parseJson(ApiRequest().getData('/rpi/get/reservation/{}'.format(roomCode)))
 
-def postSensorData(temperature, humidity, roomCode, timestamp):
-    api.postData('/rpi/add/sensorData', {'temperature': temperature, 'humidity': humidity, 'room_code': roomCode, 'timestamp': timestamp})
+    def postSensorData(self, temperature, humidity, roomCode, timestamp):
+        ApiRequest().postData('/rpi/add/sensorData', {'temperature': temperature, 'humidity': humidity, 'room_code': roomCode, 'timestamp': timestamp})
 
-def postNewRaspberry(roomCode, active=1):
-    api.postData('/rpi/add/raspberry',{'room_code':roomCode, 'active': active})
+    def postNewRaspberry(self, roomCode, active=1):
+        ApiRequest().postData('/rpi/add/raspberry',{'room_code':roomCode, 'active': active})
 
-def postUpdateRaspberry(id, roomCode):
-     api.postData('/rpi/update/raspberry', {'room_code': roomCode, 'id': id})
+    def postUpdateRaspberry(self, id, roomCode):
+         ApiRequest().postData('/rpi/update/raspberry', {'room_code': roomCode, 'id': id})
 
+    def parseJson(self, data):
+        try:        
+            return json.loads(data)['response']
+        except:
+            logging.error('An error as occured')
 
-def parseJson(data):
-    try:        
-        return json.loads(data)['response']
-    except:
-        logging.error('An error as occured')

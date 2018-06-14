@@ -30,5 +30,5 @@ def stop():
     turnOffDisplay()
     sys.exit(1)
 
-init()
-
+if __name__=='__main__':
+    init()

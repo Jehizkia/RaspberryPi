@@ -1,22 +1,22 @@
 import grovepi
 import display
 import socketHandler
-import apiRequestController as api
-import configHandler as config
+from apiRequestController import ApiRequestController as api
+from configHandler import Configuration as config
 import sensor
 import time
 
 #Ports/settings
-button_port = config.getData('grovepi_data', 'button_port', 'int')
-rotary_port = config.getData('grovepi_data', 'rotaryangle_port', 'int')
-rpiId = config.getData('app_data', 'rpi_id', 'int')
-roomCode = config.getData('app_data', 'room')
+button_port = config().getData('grovepi_data', 'button_port', 'int')
+rotary_port = config().getData('grovepi_data', 'rotaryangle_port', 'int')
+rpiId = config().getData('app_data', 'rpi_id', 'int')
+roomCode = config().getData('app_data', 'room')
 grovepi.pinMode(button_port, 'INPUT')
 
 #globals
 current = 0
 refreshCount = 0
-refreshRate = 30
+refreshRate = 10
 socket = socketHandler.SocketWriter()
 
 def init():
@@ -69,7 +69,7 @@ def checkRefresh():
    if(refreshCount >= refreshRate):
       refreshCount = 0
       display.displayCurrentView()
-      api.postSensorData(sensor.getDhtData()[0],  sensor.getDhtData()[1], roomCode, time.time())      
+      #api().postSensorData(sensor.getDhtData()[0],  sensor.getDhtData()[1], roomCode, time.time())      
    else:
       refreshCount+= 1
 

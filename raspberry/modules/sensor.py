@@ -1,10 +1,10 @@
 from grovepi import *
 from time import sleep
 from math import isnan
-import configHandler as config
+from configHandler import Configuration as config
 
-sensor_port = config.getData('grovepi_data', 'dht_sensor_port', 'int')
-sensor_type = config.getData('grovepi_data', 'dht_sensor_type', 'int')
+sensor_port = config().getData('grovepi_data', 'dht_sensor_port', 'int')
+sensor_type = config().getData('grovepi_data', 'dht_sensor_type', 'int')
 
 def getDhtData():
     try:
@@ -22,7 +22,4 @@ def getDhtData():
              getDhtData()
             
     except KeyboardInterrupt as e:
-        print('Exit program')     
-
-    
-
+        print('Exit program')
