@@ -1,6 +1,6 @@
 #Setup
-from modules.setupRpi import isFirstRun
-isFirstRun()
+from modules.setupRpi import SetupRpi
+SetupRpi().isFirstRun()
 
 #Imports
 import sys, logging

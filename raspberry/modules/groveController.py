@@ -3,7 +3,7 @@ from display import DisplayController as displayControl
 import socketHandler
 from apiRequestController import ApiRequestController
 from configHandler import Configuration as config
-import sensor
+from sensor import Sensor
 import time
 
 class GroveController:
@@ -17,12 +17,12 @@ class GroveController:
       self.display = displayControl()
       grovepi.pinMode(self.button_port, 'INPUT')
 
-      #globals
       self.current = 0
       self.refreshCount = 0
       self.refreshRate = 10
       self.socket = socketHandler.SocketWriter()
       self.api = ApiRequestController()
+      self.sensor = Sensor()
 
       self.display.displayCurrentView()
 
@@ -69,7 +69,7 @@ class GroveController:
       if(self.refreshCount >= self.refreshRate):
          self.refreshCount = 0
          self.display.displayCurrentView()
-         self.api.postSensorData(sensor.getDhtData()[0],  sensor.getDhtData()[1], self.roomCode, time.time())      
+         self.api.postSensorData(self.sensor.getDhtData()[0],  self.sensor.getDhtData()[1], self.roomCode, time.time())      
       else:
          self.refreshCount+= 1
 
