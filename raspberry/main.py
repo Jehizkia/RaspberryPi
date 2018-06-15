@@ -1,19 +1,15 @@
 #Setup
-from modules.setupRpi import isFirstRun
-isFirstRun()
+from modules.setupRpi import SetupRpi
+SetupRpi().isFirstRun()
 
 #Imports
 import sys, logging
-import modules.groveController as controller
+from modules.groveController import GroveController
 from time import sleep
-from modules.display import turnOffDisplay
+from modules.display import DisplayController
 
 logging.basicConfig(level=logging.INFO)
-
-def init():
-    logging.info('Initialization')
-    controller.init()
-    start()
+controller = GroveController()
 
 def start():
     logging.info('Start app')     
@@ -27,8 +23,8 @@ def start():
     
 def stop():
     logging.info('Exiting program')
-    turnOffDisplay()
+    DisplayController().turnOffDisplay()
     sys.exit(1)
 
-init()
-
+if __name__=='__main__':
+    start()

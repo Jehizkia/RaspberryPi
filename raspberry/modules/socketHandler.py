@@ -1,15 +1,14 @@
-from requests.exceptions import ConnectionError
 from socketIO_client_nexus import SocketIO, LoggingNamespace
 import json
 import os, sys
 sys.path.insert(1, os.path.join(sys.path[0], '..'))
-import configHandler as config
+from configHandler import Configuration as config
 
 class SocketWriter:
 
     def __init__(self):
-        self._url = config.getData('app_data', 'socket_url')
-        self._port = config.getData('app_data', 'socket_port', 'int')
+        self._url = config().getData('app_data', 'socket_url')
+        self._port = config().getData('app_data', 'socket_port', 'int')
         print('-[request]>connecting')
         try:
             self._socket = SocketIO(self._url,self._port, wait_for_connection=False)
