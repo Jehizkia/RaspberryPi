@@ -1,12 +1,11 @@
-from views.Temp import TempView
-from views.Notify import NotifyView
+import views
 
 class Dispatcher(object):
 
     #Views to dispatch
     def __init__(self):
-        self.thempHumView = TempView('', [150,50,100])
-        self.nofityView = NotifyView('No notifications', [120,0,0])
+        self.thempHumView = views.TempView('', [150,50,100])
+        self.nofityView = views.NotifyView('No notifications', [120,0,0])
 
     #check if views exist to dispatch
     def dispatch(self, request):
