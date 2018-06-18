@@ -3,6 +3,7 @@ import grove_rgb_lcd as lcd
 import grovepi
 from viewController import RequestController, Request
 from time import sleep
+import logging
 
 class DisplayController:
 
@@ -14,9 +15,9 @@ class DisplayController:
     def displayCurrentView (self):
         try:
             self.viewControl.dispatch_request(Request(self.viewRequests[self.currentView]))
-            print('-[action]> Display current view')
+            logging.info('-[action]> Display current view')
         except IndexError as e:
-            print(e)
+            logging.error(e)
         
     def turnOffDisplay (self):
         lcd.setText('')
@@ -28,17 +29,17 @@ class DisplayController:
             if(self.currentView == (len(self.viewRequests) - 1)):
                 self.currentView = 0
                 self.displayCurrentView()
-                print('-[action]> Display next view')
+                logging.info('-[action]> Display next view')
             else:
                 self.currentView += 1
                 self.displayCurrentView()
-                print('-[action]> Display next view')
+                logging.info('-[action]> Display next view')
 
         except IndexError as e:
-            print(e)
+             logging.error(e)
 
     def exitProgram(self):
-        print('-[action]> Closing program')
+        logging.info('-[action]> Closing program')
         lcd.setText('Closing program...')
         sleep(1)
         self.turnOffDisplay()
