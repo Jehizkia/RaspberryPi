@@ -13,7 +13,7 @@ To make use of the default configuration please connect the components to the fo
 - LCD(I2C-2)
 
 
-Download the most recent version of the software from the github repo and select executable download.
+Download the most recent version of the software from the github release page and select executable download.
 Place the folder on the raspberry and run it.
 Follow the setup steps.
 
