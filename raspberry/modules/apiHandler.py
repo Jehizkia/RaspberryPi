@@ -18,13 +18,12 @@ class ApiRequest():
     def getData(self, route, urlParameters=''):
         try:
             logging.info('Getting data from: {}'.format(route))
-            response = requests.get(self.createUrl(route), params=urlParameters)
+            response = requests.get(self.createUrl(route), params=urlParameters, timeout=30)
             logging.info('Status code request: {}'.format(response.status_code))
             return response.text
 
         except requests.exceptions.RequestException as e:
             logging.error(e)
-
 
     def postData(self, route, payload):
         try:

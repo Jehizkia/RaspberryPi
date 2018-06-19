@@ -5,6 +5,7 @@ from apiRequestController import ApiRequestController
 from configHandler import Configuration as config
 from sensor import Sensor
 import time
+import logging
 
 class GroveController:
 
@@ -28,7 +29,7 @@ class GroveController:
 
    def checkButtonPress(self):
        if(grovepi.digitalRead(self.button_port)):
-           print('-[action]> Single button press')
+           logging.info('-[action]> Single button press')
            self.display.nextView()
 
    def checkRotaryTurn(self):      
@@ -39,23 +40,23 @@ class GroveController:
            if( self.ifCurrentView(self.current, 1)):
                 pass
            else:          
-                print('-[action]> Rotary view: 1')
-                self.socket.send('changeView', {'room': 1, 'view':'Calendar'})
+                logging.info('-[action]> Rotary view: 1')
+                self.socket.send('changeView', {'room': self.roomCode, 'view':'Calendar'})
            self.current = 1
            
        elif (rotaryPosistion >= 341 and rotaryPosistion <= 682):
            if( self.ifCurrentView(self.current, 2)):
                pass
            else:
-               print('-[action]> Rotary view: 2')
-               self.socket.send('changeView', {'room': 1, 'view':'Temperature'})
+               logging.info('-[action]> Rotary view: 2')
+               self.socket.send('changeView', {'room': self.roomCode, 'view':'Temperature'})
            self.current = 2
        else:
            if(self.ifCurrentView(self.current, 3)):
                pass
            else:
-               print('-[action]> Rotary view: 3')
-               self.socket.send('changeView', {'room': 1, 'view':'Room changes'})
+               logging.info('-[action]> Rotary view: 3')
+               self.socket.send('changeView', {'room': self.roomCode, 'view':'Verification'})
            self.current = 3
 
    #Check if current view equals rotaryView
