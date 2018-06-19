@@ -15,5 +15,5 @@ class TestSensor(unittest.TestCase):
         self.assertIsInstance(self.sensor.getDhtData()[0], float)
         self.assertIsInstance(self.sensor.getDhtData()[1], float)
 
-    if __name__ == '__main__':
-        print unittest.main()
+suite = unittest.TestLoader().loadTestsFromTestCase(TestSensor)
+unittest.TextTestRunner(verbosity=2).run(suite)

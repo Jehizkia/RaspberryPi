@@ -13,5 +13,5 @@ class TestGroveInputs(unittest.TestCase):
         self.assertTrue(self.groveController.ifCurrentView(1,1))
         self.assertFalse(self.groveController.ifCurrentView(1,3))
     
-    if __name__ == '__main__':        
-        print unittest.main()
+suite = unittest.TestLoader().loadTestsFromTestCase(TestGroveInputs)
+unittest.TextTestRunner(verbosity=2).run(suite)

@@ -9,7 +9,10 @@ class SocketWriter:
 
     def __init__(self):
         self._url = config().getData('app_data', 'socket_url')
-        self._port = config().getData('app_data', 'socket_port', 'int')
+        self._port = config().getData('app_data', 'socket_port', 'int')        
+        self.connect()
+        
+    def connect(self):
         logging.info('-[request]>connecting')
         try:
             self._socket = SocketIO(self._url,self._port, wait_for_connection=False)

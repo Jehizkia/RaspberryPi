@@ -1,4 +1,4 @@
-from distutils.core import setup
+from setuptools import setup
 
 setup(name='RaspberryPi Manager',
       version='1.0',
@@ -6,6 +6,7 @@ setup(name='RaspberryPi Manager',
       author='Hiz',
       author_email='0893430@hr.nl',
       url='https://github.com/Jehizkia',
-      packages=['distutils', 'distutils.command']
+      packages=['raspberry'],
+      install_requires=['requests', 'socketIO-client-nexus', 'grovepi', 'PyInstaller']
      )
 
